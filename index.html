@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valentine</title>
     <link rel="stylesheet" href="./style.css">
-    
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
     <div class="container">  
@@ -30,16 +30,33 @@
         </div>
         <script>
             $(document).ready(function () {
-    $('.container').mouseenter(function () {
-        $('.card').stop().animate({
-            top: '-90px'
-        }, 'slow');
-    }).mouseleave(function () {
-        $('.card').stop().animate({
-            top: 0
-        }, 'slow');
-    });
-});
+                // Check if the device is a mobile device
+                function isMobile() {
+                    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+                }
+
+                // Use hover for desktop and click for mobile
+                if (isMobile()) {
+                    $('.container').on('click', function () {
+                        $('.card').stop().animate({
+                            top: '-90px'
+                        }, 'slow');
+                    });
+                } else {
+                    $('.container').hover(
+                        function () {
+                            $('.card').stop().animate({
+                                top: '-90px'
+                            }, 'slow');
+                        },
+                        function () {
+                            $('.card').stop().animate({
+                                top: 0
+                            }, 'slow');
+                        }
+                    );
+                }
+            });
         </script>
 </body>
 </html>
